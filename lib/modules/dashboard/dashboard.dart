@@ -1,5 +1,5 @@
 import 'package:edunews/core/constants/app_data.dart';
-import 'package:edunews/extensions/widget_extension.dart';
+import 'package:edunews/core/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
 ///This is the initial screen of this app
@@ -11,19 +11,21 @@ class DashboardView extends StatefulWidget {
   State<DashboardView> createState() => _DashboardViewState();
 }
 
-class _DashboardViewState extends State<DashboardView>
-    with SingleTickerProviderStateMixin {
-  TabController? tabController;
+class _DashboardViewState extends State<DashboardView> with SingleTickerProviderStateMixin {
+  late final TabController? _tabCtrl;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: AppData.tabs.length, vsync: this);
+    _tabCtrl = TabController(
+      length: AppData.tabs.length,
+      vsync: this,
+    );
   }
 
   @override
   void dispose() {
-    tabController?.dispose();
+    _tabCtrl?.dispose();
     super.dispose();
   }
 
@@ -42,7 +44,7 @@ class _DashboardViewState extends State<DashboardView>
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    tabController?.animateTo(index);
+                    _tabCtrl?.animateTo(index);
                     setState(() {});
                   },
                   child: Container(
@@ -51,9 +53,7 @@ class _DashboardViewState extends State<DashboardView>
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
-                          color: tabController?.index == index
-                              ? Colors.red
-                              : Colors.transparent,
+                          color: _tabCtrl?.index == index ? Colors.red : Colors.transparent,
                           width: 3,
                         ),
                       ),
@@ -61,9 +61,7 @@ class _DashboardViewState extends State<DashboardView>
                     child: Text(
                       AppData.tabs[index],
                       style: TextStyle(
-                        color: tabController?.index == index
-                            ? Colors.black
-                            : Colors.black87,
+                        color: _tabCtrl?.index == index ? Colors.black : Colors.black87,
                       ),
                     ),
                   ),
@@ -76,7 +74,7 @@ class _DashboardViewState extends State<DashboardView>
       body: Center(
         child: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
-          controller: tabController,
+          controller: _tabCtrl,
           children: AppData.tabs.map((String tab) {
             return ListView.builder(
               itemCount: AppData.newsItems.length,
@@ -104,8 +102,7 @@ class _DashboardViewState extends State<DashboardView>
                             SizedBox(
                               height: 100,
                               width: 200,
-                              child: Image.network(
-                                  AppData.newsItems[index]['image']!),
+                              child: Image.network(AppData.newsItems[index]['image']!),
                             ),
                             Expanded(
                               child: SizedBox(

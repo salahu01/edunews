@@ -23,14 +23,8 @@ extension WidgetX on Widget {
       );
 
   ///
-  Widget pOnly(
-          {double left = 0,
-          double top = 0,
-          double right = 0,
-          double bottom = 0}) =>
-      Padding(
-        padding:
-            EdgeInsets.only(left: left, top: top, right: right, bottom: bottom),
+  Widget pOnly({double left = 0, double top = 0, double right = 0, double bottom = 0}) => Padding(
+        padding: EdgeInsets.only(left: left, top: top, right: right, bottom: bottom),
         child: this,
       );
 
@@ -39,10 +33,7 @@ extension WidgetX on Widget {
         alignment: alignment,
         child: this,
       );
-  Widget visible(
-          {required bool isVisible,
-          Widget replacer = const SizedBox.shrink()}) =>
-      Visibility(
+  Widget visible({required bool isVisible, Widget replacer = const SizedBox.shrink()}) => Visibility(
         visible: isVisible,
         replacement: replacer,
         child: this,
