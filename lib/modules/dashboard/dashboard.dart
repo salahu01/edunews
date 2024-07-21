@@ -1,4 +1,5 @@
 import 'package:edunews/core/constants/app_data.dart';
+import 'package:edunews/core/extensions/typography_extension.dart';
 import 'package:edunews/core/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -33,43 +34,54 @@ class _DashboardViewState extends State<DashboardView> with SingleTickerProvider
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
-          child: SizedBox(
-            height: 50,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: AppData.tabs.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    _tabCtrl?.animateTo(index);
-                    setState(() {});
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: _tabCtrl?.index == index ? Colors.red : Colors.transparent,
-                          width: 3,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      AppData.tabs[index],
-                      style: TextStyle(
-                        color: _tabCtrl?.index == index ? Colors.black : Colors.black87,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+        title: Text(
+          'EduNewsToday',
+          style: const TextStyle(color: Colors.black, fontSize: 48).parisW700,
+        ),
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.search,
           ),
         ),
+        centerTitle: true,
+        // bottom: PreferredSize(
+        //   preferredSize: const Size.fromHeight(50),
+        //   child: SizedBox(
+        //     height: 50,
+        //     child: ListView.builder(
+        //       scrollDirection: Axis.horizontal,
+        //       shrinkWrap: true,
+        //       itemCount: AppData.tabs.length,
+        //       itemBuilder: (context, index) {
+        //         return GestureDetector(
+        //           onTap: () {
+        //             _tabCtrl?.animateTo(index);
+        //             setState(() {});
+        //           },
+        //           child: Container(
+        //             padding: const EdgeInsets.symmetric(horizontal: 30),
+        //             alignment: Alignment.center,
+        //             decoration: BoxDecoration(
+        //               border: Border(
+        //                 bottom: BorderSide(
+        //                   color: _tabCtrl?.index == index ? Colors.red : Colors.transparent,
+        //                   width: 3,
+        //                 ),
+        //               ),
+        //             ),
+        //             child: Text(
+        //               AppData.tabs[index],
+        //               style: TextStyle(
+        //                 color: _tabCtrl?.index == index ? Colors.black : Colors.black87,
+        //               ),
+        //             ),
+        //           ),
+        //         );
+        //       },
+        //     ),
+        //   ),
+        // ),
       ),
       body: Center(
         child: TabBarView(
